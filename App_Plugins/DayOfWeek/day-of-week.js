@@ -11,11 +11,13 @@ export class DayOfWeekSelector extends UmbLitElement {
   value = 0;
   displayList = [];
   list = [];
+  defaultStartDayOfWeekValue = 3;
+  
 
   connectedCallback() {
-    super.connectedCallback();
-
-    // fetch(`/umbraco/backoffice/UmbracoDayOfWeek/DayOfWeekApi/GetKeyValueList?defaultDayOfWeek?${this.default}`).then(res=>res.json()).then(results => {
+      super.connectedCallback();
+      this.defaultStartDayOfWeekValue = this.config.find(i => i.alias === 'defaultStartDayOfWeek')?.value || this.defaultStartDayOfWeekValue;
+    // fetch(`/umbraco/backoffice/UmbracoDayOfWeek/DayOfWeekApi/GetKeyValueList?defaultDayOfWeek?${this.defaultStartDayOfWeekValue}`).then(res=>res.json()).then(results => {
     Promise.resolve([{Id:0,DefaultName:'untranslated_sunday'},{Id:1,DefaultName:'untranslated_monday'},{Id:2,DefaultName:'untranslated_tuesday'},{Id:3,DefaultName:'untranslated_wednesday'},{Id:4,DefaultName:'untranslated_thursday'},{Id:5,DefaultName:'untranslated_friday'},{Id:6,DefaultName:'untranslated_saturdayday'}]).then(results => {
       this.list = results; 
       this.mapList();
@@ -25,10 +27,8 @@ export class DayOfWeekSelector extends UmbLitElement {
   mapList() {
     this.displayList = this.list.map(item => ({
       name: this.localize.term(`dayOfWeek_d${item.Id}`) || item.DefaultName, 
-      value: item.Id,
-      selected: this.value !== undefined  
-        ? this.value == item.Id
-        : this.config.find(i=>i.alias === 'defaultStartDayOfWeek')?.value === item.Id
+      value: +item.Id,
+      selected: +this.value === item.Id
     }));
     this.requestUpdate();
   }
