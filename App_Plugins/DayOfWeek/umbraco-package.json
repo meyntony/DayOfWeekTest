@@ -1,7 +1,7 @@
 {
   "$schema": "../../umbraco-package-schema.json",
   "name": "DayOfWeek",
-  "version": "0.1.0",
+  "version": "15.0.0",
   "extensions": [
         {
             "type": "propertyEditorUi",
@@ -59,13 +59,13 @@
               "culture": "da",
               "localizations": {
                   "dayOfWeek": {
-                      "d0": "Søndag",
-                      "d1": "Mandag",
-                      "d2": "Tirsdag",
-                      "d3": "Onsdag",
-                      "d4": "Torsdag",
-                      "d5": "Fredag",
-                      "d6": "Lørdag"
+                      "d0": "søndag",
+                      "d1": "mandag",
+                      "d2": "tirsdag",
+                      "d3": "onsdag",
+                      "d4": "torsdag",
+                      "d5": "fredag",
+                      "d6": "lørdag"
                   }
               }
             }
