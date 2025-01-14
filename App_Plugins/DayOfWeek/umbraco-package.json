@@ -1,0 +1,74 @@
+{
+  "$schema": "../../umbraco-package-schema.json",
+  "name": "DayOfWeek",
+  "version": "0.1.0",
+  "extensions": [
+        {
+            "type": "propertyEditorUi",
+            "alias": "DayOfWeek.PropertyEditorUi.Selector",
+            "name": "DayOfWeek Property Editor UI",
+            "element": "/App_Plugins/DayOfWeek/day-of-week.js",
+            "elementName": "day-of-week-selector",
+            "meta": {
+                "label": "Day Of Week",
+                "icon": "icon-code",
+                "group": "common",
+                "propertyEditorSchemaAlias": "Umbraco.Plain.String",
+                "defaultData": [
+                    {
+                      "alias": "defaultStartDayOfWeek",
+                      "value": 0
+                    }
+                ],
+                "settings": {
+                    "properties": [
+                        {
+                            "alias": "defaultStartDayOfWeek",
+                            "label": "Default Start Day of Week",
+                            "description": "This is the default start day of the Week",
+                            "propertyEditorUiAlias": "DayOfWeek.PropertyEditorUi.Selector"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "localization",
+            "alias": "DayOfWeek.Localize.En",
+            "name": "English",
+            "meta": {
+              "culture": "en",
+              "localizations": {
+                  "dayOfWeek": {
+                      "d0": "Sunday",
+                      "d1": "Monday",
+                      "d2": "Tuesday",
+                      "d3": "Wednesday",
+                      "d4": "Thursday",
+                      "d5": "Friday",
+                      "d6": "Saturday"
+                  }
+              }
+            }
+        },
+        {
+            "type": "localization",
+            "alias": "DayOfWeek.Localize.Da",
+            "name": "Dansk",
+            "meta": {
+              "culture": "da",
+              "localizations": {
+                  "dayOfWeek": {
+                      "d0": "Søndag",
+                      "d1": "Mandag",
+                      "d2": "Tirsdag",
+                      "d3": "Onsdag",
+                      "d4": "Torsdag",
+                      "d5": "Fredag",
+                      "d6": "Lørdag"
+                  }
+              }
+            }
+        }
+    ]
+}
