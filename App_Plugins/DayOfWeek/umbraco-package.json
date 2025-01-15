@@ -13,7 +13,7 @@
         "label": "Day Of Week",
         "icon": "icon-code",
         "group": "common",
-        "propertyEditorSchemaAlias": "Umbraco.Plain.String",
+        "propertyEditorSchemaAlias": "Umbraco.Plain.Integer",
         "defaultData": [
           {
             "alias": "defaultStartDayOfWeek",

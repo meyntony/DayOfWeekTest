@@ -5,7 +5,7 @@ namespace DayOfWeekTest
 {
 	public class UmbracoDayOfWeekConverter : IPropertyValueConverter
 	{
-		public bool IsConverter(IPublishedPropertyType propertyType) => propertyType.EditorAlias == "UmbracoDayOfWeek";
+		public bool IsConverter(IPublishedPropertyType propertyType) => propertyType.EditorUiAlias == "UmbracoDayOfWeek";
 		public object ConvertIntermediateToObject(IPublishedElement owner, IPublishedPropertyType propertyType, PropertyCacheLevel referenceCacheLevel, object inter, bool preview) => Enum.TryParse<DayOfWeek>(inter?.ToString(), out DayOfWeek d) ? d : null;
 
 		public object ConvertIntermediateToXPath(IPublishedElement owner, IPublishedPropertyType propertyType, PropertyCacheLevel referenceCacheLevel, object inter, bool preview)

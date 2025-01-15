@@ -53,8 +53,7 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		/// My day
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "15.1.1+4f3dd04")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("myDay")]
-		public virtual string MyDay => this.Value<string>(_publishedValueFallback, "myDay");
+		public virtual global::System.Nullable<global::System.DayOfWeek> MyDay => this.Value<global::System.Nullable<global::System.DayOfWeek>>(_publishedValueFallback, "myDay");
 	}
 }
