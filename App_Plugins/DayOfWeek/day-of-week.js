@@ -42,7 +42,7 @@ export class DayOfWeekSelector extends UmbLitElement {
 	mapList() {
 		this.displayList = this.list.map(item => ({
 			name: this.localize.term(`dayOfWeek_d${item.id}`) || item.DefaultName,
-			value: +item.id,
+			value: item.id,
 			selected: +this.value === item.id
 		}));
 		this.requestUpdate();
