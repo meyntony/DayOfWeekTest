@@ -13,7 +13,7 @@ export class DayOfWeekSelector extends UmbLitElement {
 	value = -1;
 	displayList = [];
 	list = [];
-	defaultStartDayOfWeekValue = 3;
+	defaultStartDayOfWeekValue = 1;
 
 
 	connectedCallback() {
