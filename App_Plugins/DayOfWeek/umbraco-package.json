@@ -3,35 +3,35 @@
   "name": "DayOfWeek",
   "version": "15.0.0",
   "extensions": [
-        {
-            "type": "propertyEditorUi",
-            "alias": "DayOfWeek.PropertyEditorUi.Selector",
-            "name": "DayOfWeek Property Editor UI",
-            "element": "/App_Plugins/DayOfWeek/day-of-week.js",
-            "elementName": "day-of-week-selector",
-            "meta": {
-                "label": "Day Of Week",
-                "icon": "icon-code",
-                "group": "common",
-                "propertyEditorSchemaAlias": "Umbraco.Plain.String",
-                "defaultData": [
-                    {
-                      "alias": "defaultStartDayOfWeek",
-                      "value": 0
-                    }
-                ],
-                "settings": {
-                    "properties": [
-                        {
-                            "alias": "defaultStartDayOfWeek",
-                            "label": "Default Start Day of Week",
-                            "description": "This is the default start day of the Week",
-                            "propertyEditorUiAlias": "DayOfWeek.PropertyEditorUi.Selector"
-                        }
-                    ]
-                }
+    {
+      "type": "propertyEditorUi",
+      "alias": "UmbracoDayOfWeek",
+      "name": "DayOfWeek Property Editor UI",
+      "element": "/App_Plugins/DayOfWeek/day-of-week.js",
+      "elementName": "day-of-week-selector",
+      "meta": {
+        "label": "Day Of Week",
+        "icon": "icon-code",
+        "group": "common",
+        "propertyEditorSchemaAlias": "Umbraco.Plain.String",
+        "defaultData": [
+          {
+            "alias": "defaultStartDayOfWeek",
+            "value": 1
+          }
+        ],
+        "settings": {
+          "properties": [
+            {
+              "alias": "defaultStartDayOfWeek",
+              "label": "Default Start Day of Week",
+              "description": "This is the default start day of the Week",
+              "propertyEditorUiAlias": "UmbracoDayOfWeek"
             }
-        },
+          ]
+        }
+      }
+    },
         {
             "type": "localization",
             "alias": "DayOfWeek.Localize.En",

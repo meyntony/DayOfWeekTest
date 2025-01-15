@@ -1,48 +1,63 @@
 import { html } from '@umbraco-cms/backoffice/external/lit';
 import { UmbLitElement } from '@umbraco-cms/backoffice/lit-element'
 import { UmbPropertyValueChangeEvent } from "@umbraco-cms/backoffice/property-editor";
-
+import { UMB_AUTH_CONTEXT } from '@umbraco-cms/backoffice/auth';
 export class DayOfWeekSelector extends UmbLitElement {
-  static properties = {
-    value: {type: Number},
-    list: {type: Array},
-    displayList: {type: Array},
-  };
-  value = 0;
-  displayList = [];
-  list = [];
-  defaultStartDayOfWeekValue = 3;
-  
+	static properties = {
+		value: { type: Number },
+		list: { type: Array },
+		displayList: { type: Array },
+		myAuthToken: { type: String }
+	};
+	myAuthToken = "";
+	value = -1;
+	displayList = [];
+	list = [];
+	defaultStartDayOfWeekValue = 3;
 
-  connectedCallback() {
-      super.connectedCallback();
-      this.defaultStartDayOfWeekValue = this.config.find(i => i.alias === 'defaultStartDayOfWeek')?.value || this.defaultStartDayOfWeekValue;
-    // fetch(`/umbraco/backoffice/UmbracoDayOfWeek/DayOfWeekApi/GetKeyValueList?defaultDayOfWeek?${this.defaultStartDayOfWeekValue}`).then(res=>res.json()).then(results => {
-    Promise.resolve([{Id:0,DefaultName:'untranslated_sunday'},{Id:1,DefaultName:'untranslated_monday'},{Id:2,DefaultName:'untranslated_tuesday'},{Id:3,DefaultName:'untranslated_wednesday'},{Id:4,DefaultName:'untranslated_thursday'},{Id:5,DefaultName:'untranslated_friday'},{Id:6,DefaultName:'untranslated_saturdayday'}]).then(results => {
-      this.list = results; 
-      this.mapList();
-    });
-  }
 
-  mapList() {
-    this.displayList = this.list.map(item => ({
-      name: this.localize.term(`dayOfWeek_d${item.Id}`) || item.DefaultName, 
-      value: +item.Id,
-      selected: +this.value === item.Id
-    }));
-    this.requestUpdate();
-  }
+	connectedCallback() {
+		super.connectedCallback();
+		console.log("Hello");
+		this.defaultStartDayOfWeekValue = this.config.find(i => i.alias === 'defaultStartDayOfWeek')?.value || this.defaultStartDayOfWeekValue;
+		this.consumeContext(UMB_AUTH_CONTEXT, (context) => {
+			context.getLatestToken().then(promiseToken => {
+				try {
+					const headers = {
+						'Authorization': `Bearer ${promiseToken}`
+					};
+					fetch(`/umbraco/management/api/v1/get-dropdown-value-list?startDayOfTheWeek=${this.defaultStartDayOfWeekValue}`, { headers }).then(response => response.json())
+						.then(results => {
+							this.list = results;
+							this.mapList();
+						})
 
-  #onChange(e) {
-    this.value = e.target.value;
-    this.dispatchEvent(new UmbPropertyValueChangeEvent());
-    this.mapList();
-  }
+				} catch (e) {
+					console.error(e);
+				}
+			});
+		});
+	}
 
-  render() {
-    return html`<uui-select 
-                  .options=${this.displayList} 
-                  @change=${this.#onChange}></uui-select>`;
-  }
+	mapList() {
+		this.displayList = this.list.map(item => ({
+			name: this.localize.term(`dayOfWeek_d${item.id}`) || item.DefaultName,
+			value: +item.id,
+			selected: +this.value === item.id
+		}));
+		this.requestUpdate();
+	}
+
+	#onChange(e) {
+		this.value = +e.target.value;
+		this.dispatchEvent(new UmbPropertyValueChangeEvent());
+		this.mapList();
+	}
+
+	render() {
+		return html`<uui-select 
+				  .options=${this.displayList} 
+				  @change=${this.#onChange}></uui-select>`;
+	}
 }
 customElements.define('day-of-week-selector', DayOfWeekSelector);

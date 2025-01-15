@@ -1,5 +1,4 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
-@{
-	Layout = null;
-}
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Home>
+@Model.Value("myDay")
+<h1>@Model.MyDay</h1>
