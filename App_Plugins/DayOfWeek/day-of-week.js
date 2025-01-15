@@ -13,13 +13,13 @@ export class DayOfWeekSelector extends UmbLitElement {
 	value = -1;
 	displayList = [];
 	list = [];
-	defaultStartDayOfWeekValue = 1;
+	defaultStartDayOfWeekValue = 1; // Monday by default
 
 
 	connectedCallback() {
 		super.connectedCallback();
-		console.log("Hello");
-		this.defaultStartDayOfWeekValue = this.config.find(i => i.alias === 'defaultStartDayOfWeek')?.value || this.defaultStartDayOfWeekValue;
+		var defaultStartDayOfWeekConfigValue = this.config.find(i => i.alias === 'defaultStartDayOfWeek')?.value;
+		this.defaultStartDayOfWeekValue = defaultStartDayOfWeekConfigValue >= 0 && defaultStartDayOfWeekConfigValue < 7 ? defaultStartDayOfWeekConfigValue : this.defaultStartDayOfWeekValue;
 		this.consumeContext(UMB_AUTH_CONTEXT, (context) => {
 			context.getLatestToken().then(promiseToken => {
 				try {
